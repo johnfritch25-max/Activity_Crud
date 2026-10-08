@@ -6,6 +6,7 @@ require("./models/Product.js");
 require("./models/Category.js");
 require("./models/Order.js");
 require("./models/Supplier.js");
+require("./models/Device.js");
 
 const databaseName = "activity_db";
 const rootSequelize = new Sequelize("mysql://root:@localhost:3306/", {

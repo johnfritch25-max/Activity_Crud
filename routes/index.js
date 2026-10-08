@@ -9,6 +9,7 @@ const category = require("../controllers/categoryController.js");
 const order = require("../controllers/orderController.js");
 const user = require("../controllers/userController.js");
 const supplier = require("../controllers/supplierController.js");
+const DeviceController = require("../controllers/DeviceController.js");
 const { insert } = require("../controllers/productController.js");
 
 const router = express.Router();
@@ -38,6 +39,13 @@ router.post("/user", user.insert);
 router.get("/supplier", supplier.index);
 router.get("/supplier/:id", supplier.show);
 router.post("/supplier", supplier.insert);
+
+
+router.get("/devices", DeviceController.all);
+router.post("/devices", DeviceController.insert);
+router.get("/devices/:id", DeviceController.show);
+router.put("/devices/:id", DeviceController.update);
+router.delete("/devices/:id", DeviceController.delete);
 
 router.use("/users", userRoutes);
 router.use("/products", productRoutes);
