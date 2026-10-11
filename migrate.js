@@ -7,8 +7,9 @@ require("./models/Category.js");
 require("./models/Order.js");
 require("./models/Supplier.js");
 require("./models/Device.js");
+require("./models/Supply.js");
 
-const databaseName = "activity_db";
+const databaseName = "supplies_db";
 const rootSequelize = new Sequelize("mysql://root:@localhost:3306/", {
   logging: false
 });
@@ -31,8 +32,8 @@ async function createDatabase() {
 
 async function migrate() {
   await sequelize.authenticate();
-  await sequelize.sync();
-  console.log("Database synchronized.");
+  await sequelize.sync({ force: true });
+  console.log("Database synchronized with Supply schema.");
 }
 
 createDatabase()

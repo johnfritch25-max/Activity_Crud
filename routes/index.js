@@ -10,15 +10,24 @@ const order = require("../controllers/orderController.js");
 const user = require("../controllers/userController.js");
 const supplier = require("../controllers/supplierController.js");
 const DeviceController = require("../controllers/DeviceController.js");
+const Device = require("../models/Device.js");
+const Supply = require("../models/Supply.js");
+const supply = require("../controllers/SupplyController.js");
 const { insert } = require("../controllers/productController.js");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-	res.json({ message: "Activity API is running" });
-});
+router.get("/", supply.index);
+router.get("/add", supply.add);
+router.post("/insert", supply.insert);
+router.get("/edit/:id", supply.edit);
+router.post("/update", supply.update);
+router.get("/delete/:id", supply.delete);
 
-router.post("/insert", insert);
+router.get("/supplies", async (req, res) => {
+	const data = await Supply.findAll();
+	res.json(data);
+});
 
 router.get("/product", product.index);
 router.get("/product/:id", product.show);

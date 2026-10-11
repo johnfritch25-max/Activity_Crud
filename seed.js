@@ -4,6 +4,7 @@ const Product = require("./models/Product.js");
 const Order = require("./models/Order.js");
 const Category = require("./models/Category.js");
 const Supplier = require("./models/Supplier.js");
+const Supply = require("./models/Supply.js");
 
 async function seed() {
   await sequelize.authenticate();
@@ -49,6 +50,17 @@ async function seed() {
     }
   });
 
+  const [supply] = await Supply.findOrCreate({
+    where: { name: "Office Stationery Kit" },
+    defaults: {
+      name: "Office Stationery Kit",
+      category: "Office",
+      supplier: supplier.companyName,
+      stock: 40,
+      price: 499.99
+    }
+  });
+
   await Order.findOrCreate({
     where: { orderNumber: "ORD-1001" },
     defaults: {
@@ -59,7 +71,7 @@ async function seed() {
     }
   });
 
-  console.log("Sample data inserted successfully.");
+  console.log("Sample supply data inserted successfully.");
 }
 
 seed()
